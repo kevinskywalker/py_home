@@ -125,8 +125,7 @@ def SVM():
     
 
     
-    X= np.array([[-1,-1],[-2,-1],[1,1],[2,1]])  
-    y = np.array([1,1,2,2])  
+    
     
     clf = SVC(decision_function_shape='ovo',probability=True)  
     clf.fit(x_train,y_train)  
@@ -155,7 +154,7 @@ def SVM():
     #results
     results=clf.predict(test_data)
     results=pd.DataFrame(results)
-    results.to_csv('results'+str(time)+'.csv')
+    results.to_csv('C:/Users/liujiacheng1/Desktop/py/py_home/keras_home/data/'+'results'+str(time)+'.csv')
 
 SVM()
 '''
