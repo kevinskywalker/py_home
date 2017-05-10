@@ -7,11 +7,35 @@ Created on Mon May  8 09:39:17 2017
 
 
 
-
+#for DeepLearning
+import time
 import pandas as pd
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense, Activation
+
+#for SVM
+from sklearn.svm import SVC  
+import numpy as np  
+from sklearn.metrics import accuracy_score
+
+#global data setz
+time=time.time()
+
+
+    
+input_data=pd.read_csv('titan_train.csv')
+test_data=pd.read_csv('titan_test.csv')
+print(input_data)
+
+x_train=input_data.iloc[:600,1:].values
+x_test=input_data.iloc[600:,1:].values
+y_train=input_data.iloc[:600,:1].values
+y_test=input_data.iloc[600:,:1].values
+
+test_data=test_data.values
+
+
 
 
 def ml2():
@@ -90,7 +114,50 @@ def ml():
     model.fit(x_train, y_train, epochs=100, batch_size=30)
     loss_and_metrics = model.evaluate(x_test, y_test, batch_size=30)
     print(loss_and_metrics)
-ml()
+
+    
+    
+    
+    
+    
+def SVM():
+    
+    
+
+    
+    X= np.array([[-1,-1],[-2,-1],[1,1],[2,1]])  
+    y = np.array([1,1,2,2])  
+    
+    clf = SVC(decision_function_shape='ovo',probability=True)  
+    clf.fit(x_train,y_train)  
+    print (clf.fit(x_train,y_train))  
+    
+    
+    results=clf.predict(x_test)
+    
+    results=np.array(results)
+    results=pd.DataFrame(results)
+    results.to_csv('results'+str(time)+'.csv')
+    print(results)
+    print(np.reshape(results,-1))
+    print('ok')
+    dec = clf.decision_function(x_train)
+    print(dec)
+    print('ok')
+    
+    
+    y_pred=clf.predict(x_train)
+    print (clf.predict(x_train))  
+    acc=accuracy_score(y_train,y_pred)
+    print(acc)
+    
+    
+    #results
+    results=clf.predict(test_data)
+    results=pd.DataFrame(results)
+    results.to_csv('results'+str(time)+'.csv')
+
+SVM()
 '''
     model = Sequential()
 
