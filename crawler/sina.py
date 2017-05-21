@@ -9,7 +9,7 @@ import pandas as pd
 
 #Global
 url='http://finance.sina.com.cn/touzi/lhpromote/lhstocks.js'
-
+#url='http://finance.sina.com.cn/realstock/company/hotstock_daily_a.js'
 headers={
 'Host': 'finance.sina.com.cn',
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0',
@@ -23,31 +23,51 @@ headers={
 
 
 #Sina
-def sina_crawl(url):
+class sina_crawl:
+    
+    def sina_crawl1(url):
 
-    raw_data=req.get(url=url,headers=headers).text
+        raw_data=req.get(url=url,headers=headers).text
 
     
   
-    process_data=raw_data.split(';')[0][27:]
-    print(type(process_data))
-    list_data = eval(process_data)
-    print(process_data)
-    print('ok')
+        process_data=raw_data.split(';')[0][23:]
+        print(type(process_data))   
+        list_data = eval(process_data)
+        print(process_data)
+        print('ok')
 
-    #Data format
+        #Data format
     
     
-    format_data=pd.DataFrame(list_data)
+        format_data=pd.DataFrame(list_data)
     
-    print(format_data)
+        print(format_data)
+    
+    def sina_crawl2(url):
+
+        raw_data=req.get(url=url,headers=headers).text
+
+    
+  
+        process_data=raw_data.split(';')[0][27:]
+        print(type(process_data))
+        list_data = eval(process_data)
+        print(process_data)
+        print('ok')
+
+        #Data format
     
     
+        format_data=pd.DataFrame(list_data)
     
+        print(format_data)
+    
+    
+    sina_crawl2(url)
 
 
 
 
 
-
-sina_crawl(url)
+sina_crawl
