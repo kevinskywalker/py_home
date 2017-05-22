@@ -21,7 +21,7 @@ headers={
 'Upgrade-Insecure-Requests': '1'
 }
 
-
+'''
 #Sina
 class sina_crawl:
     
@@ -92,6 +92,39 @@ class sina_crawl:
         sina_crawl3=sina_crawl3()
 
 
+        
+慧博
+'''
+
+
+        
+class ths_crawl:
+    
+    def crawler():
+        url='http://m.0033.com/list/hd/wizard.json'
+        raw_data=req.get(url=url).text[7:][:-1]
+        print(type(raw_data))
+        list_data = list(eval(raw_data))
+        print(type(list_data[1]))
+        format_data=pd.DataFrame(raw_data)
+    
+        print(format_data)
+        print(raw_data)
+        process_data=raw_data.split(';')
+        for data in process_data:
+            try:
+                clean_data = data.split('=')[1]
+                #print(clean_data)
+                print(type(process_data))
+                list_data = eval(clean_data)
+                #print(process_data)
+                print('ok')
+                format_data=pd.DataFrame(list_data)
+    
+                print(format_data)
+            except:
+                print('error')
 
 
 
+    crawler()
