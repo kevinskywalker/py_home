@@ -25,12 +25,11 @@ headers={
 #Sina
 class sina_crawl:
     
-    def sina_crawl1(url):
+    def sina_crawl1():
 
+        url='http://finance.sina.com.cn/realstock/company/hotstock_daily_a.js'
         raw_data=req.get(url=url,headers=headers).text
-
-    
-  
+        #process
         process_data=raw_data.split(';')[0][23:]
         print(type(process_data))   
         list_data = eval(process_data)
@@ -44,12 +43,12 @@ class sina_crawl:
     
         print(format_data)
     
-    def sina_crawl2(url):
+    def sina_crawl2():
 
+        url='http://finance.sina.com.cn/touzi/lhpromote/lhstocks.js'
+        
         raw_data=req.get(url=url,headers=headers).text
 
-    
-  
         process_data=raw_data.split(';')[0][27:]
         print(type(process_data))
         list_data = eval(process_data)
@@ -63,11 +62,36 @@ class sina_crawl:
     
         print(format_data)
     
+
+    def sina_crawl3():
+
+        url='http://hq.sinajs.cn/ran=0.45836153902703314&format=json&list=new_all_changepercent_up,new_all_changepercent_down,si_api0,si_api1,new_all_turnoverrate'
+        
+        raw_data=req.get(url=url).text
+        #print(raw_data)
+        process_data=raw_data.split(';')
+        for data in process_data:
+            try:
+                clean_data = data.split('=')[1]
+                #print(clean_data)
+                print(type(process_data))
+                list_data = eval(clean_data)
+                #print(process_data)
+                print('ok')
+                format_data=pd.DataFrame(list_data)
     
-    sina_crawl2(url)
+                print(format_data)
+            except:
+                print('error')
+            #Data format
+            
+    
+
+    
+    if __name__=='__main__':
+        sina_crawl3=sina_crawl3()
 
 
 
 
 
-sina_crawl
